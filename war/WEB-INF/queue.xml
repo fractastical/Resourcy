@@ -1,0 +1,11 @@
+<queue-entries>
+  <queue>
+    <name>default</name>
+    <rate>1/s</rate>
+  </queue>
+  <queue>
+    <name>defer</name>
+    <rate>1/h</rate>
+  </queue>
+</queue-entries>
+  

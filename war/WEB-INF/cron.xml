@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cronentries>
+	<cron>
+		<url>/test/battery</url>
+		<description>Test wavelet creation and fetching</description>
+		<schedule>every 1 hours synchronized</schedule>
+		<timezone>America/Los_Angeles</timezone>
+	</cron>
+	<cron>
+		<url>/test/battery/sandbox</url>
+		<description>Test wavelet creation and fetching on sandbox</description>
+		<schedule>every 2 hours synchronized</schedule>
+		<timezone>America/Los_Angeles</timezone>
+	</cron>
+	
+</cronentries>

@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+	<ModulePrefs title="Waffle" height="250">
+		<Require feature="wave"/>
+		<Require feature="dynamic-height"/>
+	</ModulePrefs>
+	<Content type="html">
+		<![CDATA[
+			<!-- css -->
+			<link type="text/css" href="http://www.waffle.dk/css/start/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
+
+			<style type="text/css">
+				.waffle
+				{
+					padding: 10px;
+					border: 2px solid #bbe;
+					background-color: #eee;
+					font-size: 10px;
+					font-family: verdana;
+					-moz-border-radius: 5px; 
+					-webkit-border-radius: 5px;
+					min-height: 250px;
+				}
+				.eventName
+				{
+					border: 1px solid #ccc;
+					font-size: 18px;
+					font-family: verdana;
+					padding: 4px;
+					width: 100%;
+					margin-bottom: 15px;
+					-moz-border-radius: 5px; 
+					-webkit-border-radius: 5px;
+				}
+
+				#selections td,
+				#selections th,
+				.ui-datepicker td,
+				.ui-datepicker th
+				{
+					text-align: center;
+					font-size: 10px;
+					font-family: verdana;
+					padding: 0;
+					-moz-border-radius: 3px; 
+					-webkit-border-radius: 3px;
+				}
+				#selections th,
+				.ui-datepicker th
+				{
+					line-height: 16px;
+					border: 1px solid #000;
+				}
+				#selections th a,
+				.ui-datepicker th a
+				{
+					display: block;
+					padding: 2px;
+					color: #000;
+					cursor: pointer;
+					text-decoration: none;
+				}
+				#selections th a:hover,
+				.ui-datepicker th a:hover
+				{
+					text-decoration: underline;
+				}
+				#selections th.empty
+				{
+					border: 0;
+					line-height: 2em;
+					text-align: left;
+					font-weight: normal;
+				}
+				#selections td,
+				.ui-datepicker td
+				{
+					background-color: #f8f8f8;
+					width: 40px;
+				}
+				#selections td.yes
+				{
+					background-color: #10e810;
+				}
+				#selections td.no
+				{
+					background-color: #e81010;
+				}
+				#selections td.no a
+				{
+					color: #fff;
+				}
+				#selections td a,
+				.ui-datepicker td a
+				{
+					color: #000;
+					display: block;
+					padding: 4px;
+					text-decoration: none;
+				}
+				#selections td a.current
+				{
+					cursor: pointer;
+				}
+				#selections td a:hover,
+				.ui-datepicker td a:hover
+				{
+					font-weight: bold;
+				}
+				#selections td.name
+				{
+					text-align: left;
+					background-color: inherit;
+					padding-right: 4px;
+					min-width: 120px;
+				}
+				#selections td.currentUser
+				{
+					border-bottom: 1px solid #999;
+					height: 4px;
+					background-color: inherit;
+					font-size: 1px;
+					-moz-border-radius: 0; 
+					-webkit-border-radius: 0;
+				}
+
+				#output
+				{
+					float: left;
+					overflow: auto;
+					max-width: 90%;
+					margin-right: 0px;
+				}
+				#addDate
+				{
+					float: left;
+					padding: 4px 5px 5px 5px;
+					display: none;
+				}
+				#addDate a
+				{
+					background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAASCAYAAABB7B6eAAACcklEQVR42pWVaa4SQRDHuYE3UE/gAYzn4aOexHcC/W4gARL2fQ2EZQBZxSBr2Pewr239KwGfwwxPO/llQld1VXUtjUYjW6VS6U08Hjf6fL6u0Wi86HQ6oQbk0Esmk19wTvPSikajfpPJdHE4HKJYLIrZbCYOh4NQWtifTCasB32ci8ViYVXjiMTtdot+vy8ulwtzPp/F6XQSx+NRFchBt9tlRxTk5M54KBSSXC6XWK/XbBjR7ff7/2Y+nwur1SooZeOb8VQq9YGuJ6bTKUe82+3Edru9A/J8Ps9fJfmVwWCA2kDvGzsIBoMS5Y4jhwJuoUQulxNarZadqOlc8fv9IpvNnqhUbzU2m21Tq9U4LcvlUhU6wA6oW9jII10UnmqK7vis0ev1nLvNZiMWi8VfoODpdJqxWCzsALWCM+xBLj8DOp2OgF1aXnaAAkGAtnyOJElsVI1MJsPByc8Nh8OrgxM7wLVQPPT1cxAJIi0UCsLpdLJRfPEbwDiQn2u1Wn8cUFtt2u02OxiNRneMx2OWUbexAxjGbbEHIJefQQqptlt24PV6JRoOjgQtpgY9H7cuQpSPdD0ejwiHwwNyIOF5eG8wGLhgvV5PlXq9LhKJxO2manrVapXngHQy5OArzwL1bcFut4tGo8F5VwPPASLEV0nebDa522i2ymR8TLy7TXQgEFhhzNHDKBLq8q9AH+dgnNhSV1bI+NPdm0QdM8SzYTabBb1PnG8MISKTg9uWy2URiURYH11Dkf8kw9+JNPFK8VVdrVZPlUplT0U6IZeP/g8ApXZB8/CDWv0XGT0qRi5f8E58IgzEhDi/gI/4SLyW2/oNg1dNa8OdiAwAAAAASUVORK5CYII=) 0 0 no-repeat;
+					width: 24px;
+					height: 18px;
+					display: block;
+					cursor: pointer;
+				}
+				#addColumnText
+				{
+					display: inline;
+					white-space: nowrap;
+					padding: 2px 0 0 4px;
+					display: none;
+				}
+				.enterDate input
+				{
+					width: 40px;
+					border: 1px solid #ccc;
+					text-align: center;
+					font-size: 12px;
+				}
+				#info,
+				#infoPermanent
+				{
+					display: none;
+				}
+				#toggleInfo
+				{
+					cursor: pointer;
+				}
+				.clear
+				{
+					clear: both;
+				}
+				.ui-datepicker
+				{
+					width: 13em;
+				}
+				.ui-datepicker td a
+				{
+					text-align: center;
+				}
+				#selections .sums th
+				{
+					text-align: left;
+					height: 22px;
+					border: 0;
+				}
+				#selections .sums td
+				{
+					/*text-align: right;*/
+					height: 22px;
+					background-color: #eee;
+					border: 1px solid #000;
+				}
+				/*#selections .sums td a
+				{
+					padding-right: 19px;
+					background: url('http://www.waffle.dk/unfold2.png') right center no-repeat;
+					cursor: pointer;
+				}*/
+				#selections .sums td a:hover
+				{
+					text-decoration: underline;
+				}
+				#yesMenu,
+				#headerMenu
+				{
+					display: none;
+				}
+			</style>
+
+			<!-- html -->
+			<div class="waffle">
+				<input type="text" id="eventName" class="eventName" value="Loading..." />
+				<div>
+					<div id="output"></div>
+					<div id="addDate">
+						<a id="addColumn" title="Click to add date or option"></a>
+						<span id="addColumnText">Enter date or option</span>
+					</div>
+					<div class="clear"></div>
+				</div>
+
+				<p id="infoPermanent">
+					Only people who have voted are shown in the list.<br />
+					<br />
+					<a id="toggleInfo">More info...</a>
+				</p>
+				
+				<div id="info">
+					<p><strong>Instructions</strong> (Waffle 0.991)<br />
+					This is a Waffle. You may use it for event planning, or any other kind of decision making.</p>
+					<p>Change the header to reflect what you want to vote about,<br />
+					then press the '+'-button to suggest as many dates or options as you like.<br />
+					Click on a date/option to remove it again.</p>
+					<p>Note that you don't have to use the date picker, so you could<br />
+					write anything you want - not just dates.</p>
+					<p>See <a href="http://www.waffle.dk" target="_blank">waffle.dk</a> for more information.</p>
+				</div>
+			</div>
+			
+			<ul id="headerMenu">
+				<li><a title="">Remove date or option</a></li>
+			</ul>
+			
+			<ul id="yesMenu">
+				<li><a title="">Create Google Calendar entry</a></li>
+			</ul>
+			
+			<!-- javascript -->
+			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript"></script>
+			<script src="http://www.waffle.dk/js/jquery-ui-1.7.2.custom.min.js" type="text/javascript"></script>
+
+			<script type="text/javascript">
+				var dates = [];
+				var participants = [];
+				var currentUserIsCreating = false;
+				var state;
+
+				// info
+				var info = document.getElementById('info');
+				document.getElementById('toggleInfo').onclick = function(e)
+				{
+					if (info.style.display == "block")
+					{
+						info.style.display = "none";
+					}
+					else
+					{
+						info.style.display = "block";
+					}
+
+					// adjust height
+					gadgets.window.adjustHeight();
+
+					return false;
+				}
+
+				// event name
+				var eventNameDefaultText = "Enter event name here";
+				var eventName = document.getElementById('eventName');
+				eventName.onkeyup = function(e)
+				{
+					// enter pressed
+					if (e.keyCode == 13)
+					{
+						e.target.blur();
+					}
+				}
+				eventName.onfocus = function(e)
+				{
+					// clear field when focus on default text
+					if (e.target.value == eventNameDefaultText)
+					{
+						e.target.value == "";
+					}
+				}
+				eventName.onblur = function(e)
+				{
+					// default text if nothing was entered
+					if (e.target.value == "")
+					{
+						e.target.value == eventNameDefaultText;
+						return;
+					}
+				
+					// send event name
+					var delta = {};
+					delta["eventName"] = e.target.value;
+					state.submitDelta(delta);
+				}
+
+				// add new column
+				var addColumn = document.getElementById('addColumn');
+				addColumn.onclick = addNewColumn;
+				
+				function addNewColumn(e)
+				{
+					currentUserIsCreating = true;
+					
+					// create new date field
+					var html = '<th class="enterDate"><input id="newDate" type="text" maxlength="20" /></th>';
+					// inject into dom
+					$('table#selections thead tr').append(html);
+					// set focus
+					document.getElementById('newDate').focus();
+
+					// initiate date picker
+					// set focus and bind datepicker
+					var picker = $('#newDate');
+					
+					picker.datepicker({
+						dateFormat: 'dd.mm',
+						gotoCurrent: true,
+						firstDay: 1,
+						duration: '',
+						constrainInput: false,
+						onClose: enterDateFieldToText
+					});
+					picker.datepicker('show');
+
+					// show helper text
+					document.getElementById('addColumnText').style.display = 'block';
+
+					// overwrite the 'enter'-event in the datepicker
+					picker.unbind("keydown");
+					picker.bind("keydown", function(e)
+					{
+						if (e.keyCode == 13)
+						{
+							picker.datepicker('hide');
+							picker.unbind("keydown");
+							return false;
+						}
+					});
+				
+					return false;
+				}
+
+				// remove date
+				function removeDate(date, index)
+				{
+					// ask before remove (unless empty)
+					var doRemove = false;
+					if (date == "")
+					{
+						doRemove = true;
+					}
+					else
+					{
+						// only allow removal for "admin" (for now, everybody can remove a column)
+						// if (wave.getViewer().getId() == wave.getHost().getId())
+						{
+							if (confirm("Ok to remove '"+ date +"'?"))
+							{
+								doRemove = true;
+							}
+						}
+					}
+					if (!doRemove) return;
+
+					// if date at index matches then remove that
+					if (dates[index] == date)
+					{
+						dates.splice(index, 1);
+					}
+
+					// otherwise remove last created
+					else
+					{
+						var i = dates.length-1;
+						while (i >= 0)
+						{
+							if (dates[i] == date)
+							{
+								dates.splice(i, 1);
+								break;
+							}
+							else
+							{
+								i--;
+							}
+						}
+					}
+
+					// set dates state
+					setStateArray("dates", dates);
+				}
+
+				// set state
+				function setStateArray(key, value)
+				{
+					var delta = {};
+					delta[key] = value.join('\t');
+					state.submitDelta(delta);
+				}
+
+				// get selections state
+				function getSelections(participantId)
+				{
+					var selections = state.get("selections"+ participantId);
+					if (selections)
+					{
+						selections = selections.split('\t');
+					}
+					else
+					{
+						// if no selections in state, then create empty selections array
+						selections = [];
+						var datesLength = dates.length;
+						for (var x = 0; x < datesLength; x++)
+						{
+							selections.push("");
+						}
+					}
+
+					return selections;
+				}
+
+				// toggle selection
+				function toggleSelection(entry, dateIndex, participantId)
+				{
+					// selections
+					var selections = getSelections(participantId);
+
+					// flip selection
+					if (selections[dateIndex] == "yes")
+					{
+						entry.innerHTML = "no";
+						selections[dateIndex] = "no";
+					}
+					else if (selections[dateIndex] == "no")
+					{
+						entry.innerHTML = "-";
+						selections[dateIndex] = "";
+					}
+					else
+					{
+						entry.innerHTML = "yes";
+						selections[dateIndex] = "yes";
+					}
+
+					// set selections state
+					setStateArray("selections"+ participantId, selections);
+
+					return false;
+				}
+
+				// convert field to text
+				function enterDateFieldToText(newText)
+				{
+					// hide helper text
+					document.getElementById('addColumnText').style.display = 'none';
+				
+					// create date in array
+					if (newText != "")
+					{
+						dates.push(newText);
+						setStateArray("dates", dates);
+					}
+					
+					// remove input field
+					$('table#selections thead th.enterDate').remove();
+
+					// mark as no longer in edit mode
+					currentUserIsCreating = false;
+				}
+
+				// render
+				function render()
+				{
+					if (currentUserIsCreating) return;
+				
+					state = wave.getState();
+					if (!state) return;
+
+					var output = "";
+					var setFocusId = null;
+
+					// show 'Add...'
+					document.getElementById('addDate').style.display = "block";
+						
+					// get event name
+					var eventNameValue = state.get("eventName");
+					if (eventNameValue && eventName.value != eventNameValue)
+					{
+						eventName.value = eventNameValue;
+					}
+					else if (eventName.value != eventNameValue)
+					{
+						eventName.value = eventNameDefaultText;
+					}
+
+					// get dates
+					var datesState = state.get("dates");
+					if (datesState)
+					{
+						dates = datesState.split('\t');
+					}
+					var datesLength = dates.length;
+
+					// format output
+					output += '<table id="selections"><thead><tr>';
+					
+					// show small helper text when no dates selected yet
+					output += '<th class="empty">';
+					if (datesLength == 0) output += 'Add date or option:';
+					output += '</th>';
+
+					// list dates
+					for (var i = 0; i < datesLength; i++)
+					{
+						if (dates[i] != "")
+						{
+							output += '<th><a href="#" onclick="return removeDate(\''+ dates[i] +'\','+ i +');" title="Click to remove">'+ dates[i] +'</a></th>';
+						}
+					}
+
+					output += '</tr></thead><tbody>';
+
+					// list participants (if at least one date specified)
+					if (datesLength > 0)
+					{
+						var selectionTitle;
+						var selectionsLength;
+						var participantId;
+						var selections;
+						var hasAtLeastOneAnswer;
+						var line;
+						
+						var currentViewerId = wave.getViewer().getId();
+						
+						var sums = {
+							answersCnt: 0,
+							yes: [],
+							no: [],
+							maybe: []
+						};
+						for (var i = 0; i < datesLength; i++)
+						{
+							sums.yes.push(0);
+							sums.no.push(0);
+							sums.maybe.push(0);
+						}
+
+						participants = wave.getParticipants();
+						var participantsLength = participants.length;
+						
+						for (var i = 0; i < participantsLength; i++)
+						{
+							participantId = participants[i].getId();
+							selections = getSelections(participantId);
+
+							// only show participants that have made selections (or the current participant)
+							if (participantId == currentViewerId || (selections && selections.length))
+							{
+								hasAtLeastOneAnswer = false;
+								selectionsLength = selections.length;
+								
+								// show participant name
+								line = '<tr>';
+								
+								if (participantId != currentViewerId)
+								{
+									line += '<td class="name">'+ participants[i].getDisplayName() +'</td>';
+								}
+								else
+								{
+									line += '<td class="name">Your vote:</td>';
+								}
+
+								// list selections for each participant
+								for (var q = 0; q < datesLength; q++)
+								{
+									if (q >= selectionsLength || selections[q] == undefined)
+									{
+										selections.push("");
+									}
+									
+									// note: don't put an 'else' before this 'if'
+									if (selections[q] == "")
+									{
+										selectionTitle = "-";
+									}
+									else
+									{
+										selectionTitle = selections[q];
+									}
+									
+									line += '<td class="'+ selections[q] +'">';
+
+									// sums
+									if (selections[q] == "yes")
+									{
+										sums.yes[q]++;
+										hasAtLeastOneAnswer = true;
+									}
+									else if (selections[q] == "no")
+									{
+										sums.no[q]++;
+										hasAtLeastOneAnswer = true;
+									}
+									else if (selections[q] == "maybe")
+									{
+										sums.maybe[q]++;
+										hasAtLeastOneAnswer = true;
+									}
+
+									// only allow toggling selection for your own entries
+									if (participantId == currentViewerId)
+									{
+										line += '<a href="#" class="current" onmouseup="return toggleSelection(this, '+ q +', \''+ participantId +'\');">'+ selectionTitle +'</a>';
+									}
+									else
+									{
+										line += '<a>'+ selectionTitle +'</a>';
+									}
+
+									line += '</td>';
+								}
+								line += '</tr>';
+								
+								// only show participant if any choices were made or participant is current user
+								if (hasAtLeastOneAnswer && participantId != currentViewerId)
+								{
+									output += line;
+								}
+								
+								// if participant is current user, then save line (used for showing it last)
+								if (participantId == currentViewerId)
+								{
+									currentUserLine = line;
+								}
+								
+								// count answers
+								if (hasAtLeastOneAnswer)
+								{
+									sums.answersCnt++;
+								}
+							}
+						}
+						
+						// show current user at the bottom
+						output += '<tr><td class="currentUser" colspan="'+ (datesLength + 1) +'">&nbsp;</td></tr>';
+						output += currentUserLine;
+						
+						// sum up
+						var yesMax = 0;
+						for (var i = 0; i < datesLength; i++)
+						{
+							if (sums.yes[i] > yesMax) yesMax = sums.yes[i];
+						}
+						
+						// sums
+						output += '</tbody><tfoot><tr class="sums">';
+						if (sums.answersCnt == 1)
+						{
+							output += '<th>'+ sums.answersCnt +' of '+ participantsLength +' has voted</th>';
+						}
+						else
+						{
+							output += '<th>'+ sums.answersCnt +' of '+ participantsLength +' have voted</th>';
+						}
+						for (var i = 0; i < datesLength; i++)
+						{
+							if (sums.yes[i] == yesMax)
+							{
+								output += '<td><a title="Yes: '+ sums.yes[i] +'. No: '+ sums.no[i] +'"><strong>'+ sums.yes[i] +'</strong></a></td>';
+							}
+							else
+							{
+								output += '<td><a title="Yes: '+ sums.yes[i] +'. No: '+ sums.no[i] +'">'+ sums.yes[i] +'</a></td>';
+							}
+						}
+						output += '</tr></tfoot>';
+
+						output += '</table>';
+					}
+					
+					// help text
+					if (datesLength == 0)
+					{
+						document.getElementById('infoPermanent').style.display = 'none';
+						document.getElementById('info').style.display = 'block';
+					}
+					else
+					{
+						document.getElementById('infoPermanent').style.display = 'block';
+						document.getElementById('info').style.display = 'none';
+					}
+					
+					// output generated html
+					document.getElementById('output').innerHTML = output;
+
+					// adjust height
+					gadgets.window.adjustHeight();
+				}
+
+				function init()
+				{
+					if (wave && wave.isInWaveContainer())
+					{
+						wave.setStateCallback(render);
+						wave.setParticipantCallback(render);
+				    }
+				}
+				gadgets.util.registerOnLoadHandler(init);
+
+				// google analytics
+				var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+				document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+				try 
+				{
+					var pageTracker = _gat._getTracker("UA-12184571-1");
+					pageTracker._trackEvent("Gadget", "Loaded");
+				    pageTracker._trackPageview();
+				} 
+				catch(err) {}
+			</script>
+		]]>
+	</Content>
+</Module>

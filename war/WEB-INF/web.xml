@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+
+	<servlet>
+		<servlet-name>ResourcyServlet</servlet-name>
+		<servlet-class>com.joeldietz.resourcy.ResourcyServlet</servlet-class>
+	</servlet>
+    <servlet-mapping>
+        <servlet-name>ResourcyServlet</servlet-name>
+        <url-pattern>/_wave/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+		<servlet-name>ResourcyTaskServlet</servlet-name>
+		<servlet-class>com.joeldietz.resourcy.ResourcyTaskServlet</servlet-class>
+	</servlet>
+
+    <servlet-mapping>
+        <servlet-name>ResourcyTaskServlet</servlet-name>
+        <url-pattern>/deleteBlip</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResourcyTaskServlet</servlet-name>
+        <url-pattern>/newPost</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>ResourcyTaskServlet</servlet-name>
+        <url-pattern>/dummy</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>ResourcyTaskServlet</servlet-name>
+        <url-pattern>/addResourceToWave</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResourcyTaskServlet</servlet-name>
+        <url-pattern>/reloadWave</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>ResourcyTaskServlet</servlet-name>
+        <url-pattern>/createWaveForCat</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+		<servlet-name>TesterBot</servlet-name>
+		<servlet-class>com.joeldietz.resourcy.TesterBot</servlet-class>
+	</servlet>
+    
+     <servlet-mapping>
+        <servlet-name>TesterBot</servlet-name>
+        <url-pattern>/test/*</url-pattern>
+    </servlet-mapping>
+
+    <security-constraint>
+        <web-resource-collection>
+            <url-pattern>/test/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+
+</web-app>

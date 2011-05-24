@@ -1,0 +1,98 @@
+<Module>
+  <ModulePrefs title="feedbackForm" height="400">
+    <Require feature="wave"/>
+  </ModulePrefs>
+
+  <Content type="html">
+  <![CDATA[
+  
+   <script type="text/javascript">
+
+    function stateUpdated() {
+      if(wave.getState().get('blogpostsuccess') == 'yes') {
+      	 var viewerName = wave.getViewer().getDisplayName();
+	     $("#commentForm").html("Blog post submitted successfully. Thank you for your feedback " + viewerName);	     
+      }
+      else if(wave.getState().get('blogpostfailure') == 'yes') {
+        $("#commentForm").html("There was a problem submitting your post. Please leave a comment at d3developer.com");
+      } 
+    }
+	
+	// Should be a change from view to edit mode when the user attempts to edit the form
+    function partUpdated() {
+		//$('#ctitle').val(wave.getViewer().getDisplayName());
+    }
+ 
+    function init() {
+      if (wave && wave.isInWaveContainer()) {
+        wave.setStateCallback(stateUpdated);
+        wave.setParticipantCallback(partUpdated);
+      }
+    }
+    gadgets.util.registerOnLoadHandler(init);
+
+    </script>
+  
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.6/jquery.validate.min.js"></script>
+	<script type="text/javascript">
+	
+	$(document).ready(function() { 
+
+	$("#blogPostForm").validate({
+	 submitHandler: function(form) {
+		  
+		  // A couple lines to help us verify that all of the values 
+		  // on our form elements are what we want them to be 
+		  //$('.formelement').each(function(index) {
+    	  //		alert($(this).attr("id") + '2: ' + $(this).val());
+  		  //	});
+
+	     var title = $("#ctitle").val();
+	     
+	     wave.getState().submitDelta({'title': title,
+	     							  'sendblogpost' : 'yes'
+	     							  });
+
+		 //We never actually submit the form
+	     //form.submit();
+			    
+ 	}
+ 
+	});
+		 
+
+});
+
+ </script>
+ 
+ <style type="text/css">
+ 
+	* { font-family: Verdana; font-size: 96%; }
+	.title { font-size: 110%; }
+	label { width: 10em; float: left; }
+	label.error { float: none; color: red; padding-left: .5em; vertical-align: top; }
+	p { clear: both; }
+	.submit { margin-left: 12em; }
+	em { font-weight: bold; padding-right: 1em; vertical-align: top; }
+
+</style>
+
+ <form class="cmxform" id="blogPostForm" method="get" action="">
+ 	 <div id="title" class="title">Feedback Form</div>
+	 <fieldset>
+	   <p>
+	     <label for="ctitle">Title</label>
+	     <em>*</em><input id="ctitle" name="ctitle" size="25" class="required formelement" minlength="2" />
+	   </p>
+	
+	   <p>
+	     <input class="submit" type="submit" value="Submit"/>
+	   </p>
+	 </fieldset>
+ </form>
+
+
+ ]]>
+</Content>
+</Module>

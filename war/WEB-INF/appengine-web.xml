@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
+	<application>resourcy</application>
+	<version>6</version>
+	<precompilation-enabled>true</precompilation-enabled>
+	
+	<!-- Configure java.util.logging -->
+	<system-properties>
+		<property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
+	    <property name="username" value="d3@d3developer.com" />
+	    <property name="password" value="fractastic4iKKZ1L5ylfGMFXiCzOeITGMe6" />
+	    <property name="ConsumerKey" value="998198159288" />
+	    <property name="ConsumerSecret" value="Tn7EW1MjCeu3cBgEQS3hT95Y" />
+	    <property name="FEEDBACK_FORM_URL" value="http://resourcy.appspot.com/feedbackform.xml" />
+	    <property name="BLOGPOST_FORM_URL" value="http://resourcy.appspot.com/blogpost.xml" />
+
+	    <property name="DUMMY_PATH" value="/dummy" />
+	    <property name="CREATE_WAVE_PATH" value="/createWaveForCat" />
+	    <property name="ADD_RESOURCE_PATH" value="/addResourceToWave" />
+	    <property name="RELOAD_WAVE_PATH" value="/reloadWave" />
+	    <property name="DELETE_BLIP_PATH" value="/deleteBlip" />
+	    <property name="FEED_POST_PATH" value="/newPost" />
+	    <property name="FEED_POST_PATH" value="/newPost" />
+	    <property name="TEST_BATTERY_PATH" value="/test/battery" />
+	    <property name="TEST_BATTERY_PATH_SANDBOX" value="/test/battery/sandbox" />
+	    
+	    
+	    <property name="RPC_SERVER_URL" value="http://gmodules.com/api/rpc" />
+	   	<property name="RPC_SERVER_URL_SANDBOX" value="http://sandbox.gmodules.com/api/rpc" />  
+
+	    <property name="EMBED_COMMENT_WAVE_URL" value="http://resourcy.appspot.com/embed.xml" />
+
+
+    </system-properties>
+    
+    <inbound-services>
+    	<service>xmpp_message</service>
+    </inbound-services>
+    
+</appengine-web-app>

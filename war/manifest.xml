@@ -1,0 +1,11 @@
+<extension name="Resourcy" 
+		description="Displays resources from a Salesforce organization and allows participants to evaluate and submit resources. See Resourcy.com for more details." 
+		thumbnailUrl="http://resourcy.appspot.com/resourcy120.jpg">
+  <version>5</version>
+  <author name="Joel Dietz" email="jdietz@gmail.com"/>
+  	<menuHook location="NEW_WAVE" text="Adds Resourcy bot to a wave">
+	    <createNewWave>
+	      <participant id="resourcy@appspot.com"/>
+	    </createNewWave>
+  </menuHook>
+</extension>
